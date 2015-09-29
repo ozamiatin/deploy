@@ -1,0 +1,27 @@
+{2} setUpClass (tempest.api.compute.servers.test_create_server.ServersTestJSON) [0.000000s] ... FAILED
+{3} tempest.api.compute.servers.test_attach_interfaces.AttachInterfacesTestJSON.test_add_remove_fixed_ip [3.588131s] ... FAILED
+{2} setUpClass (tempest.api.compute.servers.test_server_actions.ServerActionsTestJSON) [0.000000s] ... FAILED
+
+{3} setUpClass (tempest.api.compute.servers.test_create_server.ServersTestManualDisk) [0.000000s] ... FAILED
+{0} tempest.api.network.test_extensions.ExtensionsTestJSON.test_list_show_extensions [0.371597s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_list [0.362900s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_show [0.317655s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_template [0.027141s] ... FAILED
+{3} setUpClass (tempest.api.compute.servers.test_server_addresses.ServerAddressesTestJSON) [0.000000s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_get_deployment_list [0.333283s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_get_deployment_metadata [0.376078s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_get_software_config [0.024531s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_create_validate [0.081703s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_update_no_metadata_change [0.145060s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_update_with_metadata_change [0.021575s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_stacks.StacksTestJSON.test_stack_crud_no_resources [0.941118s] ... FAILED
+{1} tempest.api.orchestration.stacks.test_stacks.StacksTestJSON.test_stack_list_responds [0.034473s] ... FAILED
+{1} tempest.scenario.test_server_basic_ops.TestServerBasicOps.test_server_basicops [6.499469s] ... FAILED
+{0} tempest.scenario.test_volume_boot_pattern.TestVolumeBootPatternV2.test_volume_boot_pattern [17.315136s] ... FAILED
+{3} tempest.scenario.test_network_basic_ops.TestNetworkBasicOps.test_network_basic_ops [8.372261s] ... FAILED
+{1} tempest.scenario.test_volume_boot_pattern.TestVolumeBootPattern.test_volume_boot_pattern [13.879575s] ... FAILED
+
+
+nosetests -sv tempest.api.compute.servers.test_server_actions:ServerActionsTestJSON
+
+nosetests -sv tempest.api.compute.servers.test_create_server:ServersTestManualDisk
