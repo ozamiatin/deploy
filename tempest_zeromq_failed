@@ -22,6 +22,8 @@
 {1} tempest.scenario.test_volume_boot_pattern.TestVolumeBootPattern.test_volume_boot_pattern [13.879575s] ... FAILED
 
 
+nosetests -sv tempest.api.compute.servers.test_create_server:ServersTestJSON
+
 nosetests -sv tempest.api.compute.servers.test_server_actions:ServerActionsTestJSON
 
 nosetests -sv tempest.api.compute.servers.test_create_server:ServersTestManualDisk

@@ -1,0 +1,132 @@
+{0} setUpClass (tempest.api.data_processing.test_jobs.JobTest) ... SKIPPED: Sahara support is required
+{0} setUpClass (tempest.api.database.flavors.test_flavors.DatabaseFlavorsTest) ... SKIPPED: DatabaseFlavorsTest skipped as trove is not available
+{0} setUpClass (tempest.api.messaging.test_claims.TestClaims) ... SKIPPED: Zaqar support is required
+{0} setUpClass (tempest.api.network.test_floating_ips.FloatingIPTestJSON) ... SKIPPED: Neutron support is required
+{0} setUpClass (tempest.api.network.test_networks.BulkNetworkOpsTestJSON) ... SKIPPED: Neutron support is required
+{0} setUpClass (tempest.api.network.test_routers.RoutersIpV6Test) ... SKIPPED: Neutron support is required
+{0} setUpClass (tempest.api.network.test_security_groups.SecGroupTest) ... SKIPPED: Neutron support is required
+{0} setUpClass (tempest.api.object_storage.test_account_services.AccountTest) ... SKIPPED: AccountTest skipped as swift is not available
+{0} setUpClass (tempest.api.object_storage.test_object_services.ObjectTest) ... SKIPPED: ObjectTest skipped as swift is not available
+{0} setUpClass (tempest.api.volume.test_volumes_list.VolumesV1ListTestJSON) ... SKIPPED: Volume API v1 is disabled
+{1} setUpClass (tempest.api.data_processing.test_cluster_templates.ClusterTemplateTest) ... SKIPPED: Sahara support is required
+{1} setUpClass (tempest.api.data_processing.test_data_sources.DataSourceTest) ... SKIPPED: Sahara support is required
+{1} setUpClass (tempest.api.data_processing.test_node_group_templates.NodeGroupTemplateTest) ... SKIPPED: Sahara support is required
+{1} setUpClass (tempest.api.data_processing.test_plugins.PluginsTest) ... SKIPPED: Sahara support is required
+{1} setUpClass (tempest.api.database.limits.test_limits.DatabaseLimitsTest) ... SKIPPED: DatabaseLimitsTest skipped as trove is not available
+{1} setUpClass (tempest.api.messaging.test_messages.TestMessages) ... SKIPPED: Zaqar support is required
+{1} setUpClass (tempest.api.network.test_ports.PortsTestJSON) ... SKIPPED: Neutron support is required
+{1} setUpClass (tempest.api.network.test_security_groups.SecGroupIPv6Test) ... SKIPPED: Neutron support is required
+{1} setUpClass (tempest.api.object_storage.test_container_services.ContainerTest) ... SKIPPED: ContainerTest skipped as swift is not available
+{1} setUpClass (tempest.api.telemetry.test_telemetry_notification_api.TelemetryNotificationAPITestJSON) ... SKIPPED: Ceilometer support is required
+{3} tempest.api.compute.security_groups.test_security_group_rules.SecurityGroupRulesTestJSON.test_security_group_rules_create [0.463386s] ... ok
+{3} tempest.api.compute.security_groups.test_security_group_rules.SecurityGroupRulesTestJSON.test_security_group_rules_list [0.338639s] ... ok
+{2} tempest.api.compute.flavors.test_flavors.FlavorsV2TestJSON.test_get_flavor [1.261320s] ... ok
+{2} tempest.api.compute.flavors.test_flavors.FlavorsV2TestJSON.test_list_flavors [0.108858s] ... ok
+{2} setUpClass (tempest.api.compute.servers.test_attach_interfaces.AttachInterfacesTestJSON) ... SKIPPED: Neutron is required
+{3} tempest.api.compute.security_groups.test_security_groups.SecurityGroupsTestJSON.test_security_groups_create_list_delete [1.552124s] ... ok
+{2} tempest.api.compute.servers.test_create_server.ServersTestJSON.test_list_servers [0.113444s] ... ok
+{2} tempest.api.compute.servers.test_create_server.ServersTestJSON.test_verify_server_details [0.000683s] ... ok
+{3} tempest.api.compute.servers.test_server_actions.ServerActionsTestJSON.test_reboot_server_hard [3.716246s] ... ok
+{2} tempest.api.compute.servers.test_create_server.ServersTestManualDisk.test_list_servers [0.037755s] ... ok
+{2} tempest.api.compute.servers.test_create_server.ServersTestManualDisk.test_verify_server_details [0.000441s] ... ok
+{2} setUpClass (tempest.api.data_processing.test_job_binaries.JobBinaryTest) ... SKIPPED: Sahara support is required
+{2} setUpClass (tempest.api.data_processing.test_job_binary_internals.JobBinaryInternalTest) ... SKIPPED: Sahara support is required
+{2} tempest.api.identity.admin.v3.test_credentials.CredentialsTestJSON.test_credentials_create_get_update_delete [0.233561s] ... ok
+{3} tempest.api.compute.servers.test_server_addresses.ServerAddressesTestJSON.test_list_server_addresses [0.041547s] ... ok
+{3} tempest.api.compute.servers.test_server_addresses.ServerAddressesTestJSON.test_list_server_addresses_by_network [0.067534s] ... ok
+{2} tempest.api.identity.admin.v3.test_endpoints.EndPointsTestJSON.test_update_endpoint [0.964496s] ... ok
+{3} setUpClass (tempest.api.database.versions.test_versions.DatabaseVersionsTest) ... SKIPPED: DatabaseVersionsTest skipped as trove is not available
+{3} tempest.api.identity.admin.v2.test_services.ServicesTestJSON.test_list_services [0.631693s] ... ok
+{2} tempest.api.identity.admin.v3.test_services.ServicesTestJSON.test_create_update_get_service [0.595268s] ... ok
+{2} tempest.api.identity.v2.test_api_discovery.TestApiDiscovery.test_api_media_types [0.154835s] ... ok
+{2} tempest.api.identity.v2.test_api_discovery.TestApiDiscovery.test_api_version_resources [0.026495s] ... ok
+{2} tempest.api.identity.v2.test_api_discovery.TestApiDiscovery.test_api_version_statuses [0.037087s] ... ok
+{3} tempest.api.identity.admin.v2.test_users.UsersTestJSON.test_create_user [0.358007s] ... ok
+{2} tempest.api.identity.v3.test_api_discovery.TestApiDiscovery.test_api_media_types [0.212640s] ... ok
+{2} tempest.api.identity.v3.test_api_discovery.TestApiDiscovery.test_api_version_resources [0.022604s] ... ok
+{2} tempest.api.identity.v3.test_api_discovery.TestApiDiscovery.test_api_version_statuses [0.026141s] ... ok
+{2} tempest.api.image.v2.test_images.BasicOperationsImagesTest.test_delete_image [0.668236s] ... ok
+{3} tempest.api.identity.admin.v3.test_domains.DefaultDomainTestJSON.test_default_domain_exists [0.245886s] ... ok
+{2} tempest.api.image.v2.test_images.BasicOperationsImagesTest.test_register_upload_get_image_file [0.523798s] ... ok
+{2} tempest.api.image.v2.test_images.BasicOperationsImagesTest.test_update_image [0.686452s] ... ok
+{2} setUpClass (tempest.api.messaging.test_queues.TestManageQueue) ... SKIPPED: Zaqar support is required
+{2} setUpClass (tempest.api.messaging.test_queues.TestQueues) ... SKIPPED: Zaqar support is required
+{2} setUpClass (tempest.api.network.test_networks.BulkNetworkOpsIpV6TestJSON) ... SKIPPED: Neutron support is required
+{2} setUpClass (tempest.api.network.test_networks.NetworksTest) ... SKIPPED: Neutron support is required
+{2} setUpClass (tempest.api.object_storage.test_container_quotas.ContainerQuotasTest) ... SKIPPED: ContainerQuotasTest skipped as swift is not available
+{3} tempest.api.identity.admin.v3.test_domains.DomainsTestJSON.test_create_update_delete_domain [0.590155s] ... ok
+{2} tempest.api.orchestration.stacks.test_stacks.StacksTestJSON.test_stack_crud_no_resources [1.537452s] ... FAILED
+{2} tempest.api.orchestration.stacks.test_stacks.StacksTestJSON.test_stack_list_responds [0.010186s] ... FAILED
+{2} tearDownClass (tempest.api.orchestration.stacks.test_stacks.StacksTestJSON) [0.000000s] ... FAILED
+{2} setUpClass (tempest.api.volume.test_volumes_actions.VolumesV1ActionsTest) ... SKIPPED: Volume API v1 is disabled
+{3} tempest.api.identity.admin.v3.test_groups.GroupsV3TestJSON.test_group_users_add_list_delete [1.853129s] ... ok
+{3} tempest.api.identity.admin.v3.test_policies.PoliciesTestJSON.test_create_update_delete_policy [0.361413s] ... ok
+{3} tempest.api.identity.admin.v3.test_regions.RegionsTestJSON.test_create_region_with_specific_id [0.182555s] ... ok
+{2} tempest.api.volume.test_volumes_actions.VolumesV2ActionsTest.test_attach_detach_volume_to_instance [1.383332s] ... ok
+{3} tempest.api.identity.admin.v3.test_roles.RolesV3TestJSON.test_role_create_update_get_list [0.360684s] ... ok
+{3} tempest.api.identity.admin.v3.test_trusts.TrustsV3TestJSON.test_get_trusts_all [1.877472s] ... ok
+{3} setUpClass (tempest.api.network.test_extensions.ExtensionsTestJSON) ... SKIPPED: Neutron support is required
+{3} setUpClass (tempest.api.network.test_networks.NetworksIpV6TestAttrs) ... SKIPPED: Neutron support is required
+{3} setUpClass (tempest.api.network.test_networks.NetworksIpV6TestJSON) ... SKIPPED: Neutron support is required
+{3} setUpClass (tempest.api.network.test_ports.PortsIpV6TestJSON) ... SKIPPED: Neutron support is required
+{3} setUpClass (tempest.api.network.test_routers.RoutersTest) ... SKIPPED: Neutron support is required
+{3} setUpClass (tempest.api.object_storage.test_account_quotas.AccountQuotasTest) ... SKIPPED: AccountQuotasTest skipped as swift is not available
+{3} tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_list [0.260474s] ... ok
+{3} tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_show [0.113491s] ... FAILED
+{3} tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_template [0.022324s] ... ok
+{3} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_get_deployment_list [0.162950s] ... FAILED
+{3} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_get_deployment_metadata [0.225417s] ... FAILED
+{3} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_get_software_config [0.016154s] ... FAILED
+{3} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_create_validate [0.218311s] ... FAILED
+{3} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_update_no_metadata_change [0.015230s] ... FAILED
+{3} tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_update_with_metadata_change [0.121584s] ... FAILED
+{3} setUpClass (tempest.api.volume.test_volumes_get.VolumesV1GetTest) ... SKIPPED: Volume API v1 is disabled
+{3} setUpClass (tempest.scenario.test_network_basic_ops.TestNetworkBasicOps) ... SKIPPED: Neutron not available
+{2} tempest.api.volume.test_volumes_get.VolumesV2GetTest.test_volume_create_get_update_delete [37.148079s] ... ok
+{2} tempest.api.volume.test_volumes_get.VolumesV2GetTest.test_volume_create_get_update_delete_from_image [22.940285s] ... ok
+{3} tempest.scenario.test_server_basic_ops.TestServerBasicOps.test_server_basicops [33.125808s] ... ok
+{2} tempest.api.volume.test_volumes_list.VolumesV2ListTestJSON.test_volume_list [0.029112s] ... ok
+{0} tempest.scenario.test_volume_boot_pattern.TestVolumeBootPatternV2.test_volume_boot_pattern [210.144283s] ... ok
+{1} tempest.scenario.test_volume_boot_pattern.TestVolumeBootPattern.test_volume_boot_pattern [210.357841s] ... ok
+
+==============================
+Failed 10 tests - output below:
+==============================
+
+
+======
+Totals
+======
+Ran: 89 tests in 376.0000 sec.
+ - Passed: 41
+ - Skipped: 38
+ - Expected Fail: 0
+ - Unexpected Success: 0
+ - Failed: 10
+Sum of execute time for each test: 328.4599 sec.
+
+==============
+Worker Balance
+==============
+ - Worker 0 (22 tests) => 0:05:58.789310
+ - Worker 1 (20 tests) => 0:00:28.429415
+ - Worker 2 (27 tests) => 0:00:55.415388
+ - Worker 3 (20 tests) => 0:00:38.856653
+
+Slowest Tests:
+
+Test id                                                                                                                                                               Runtime (s)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------  -----------
+tempest.scenario.test_volume_boot_pattern.TestVolumeBootPatternV2.test_volume_boot_pattern[compute,id-557cd2c2-4eb8-4dce-98be-f86765ff311b,image,smoke,volume]        117.158
+tempest.scenario.test_volume_boot_pattern.TestVolumeBootPattern.test_volume_boot_pattern[compute,id-557cd2c2-4eb8-4dce-98be-f86765ff311b,image,smoke,volume]          116.698
+tempest.api.volume.test_volumes_get.VolumesV2GetTest.test_volume_create_get_update_delete_from_image[id-54a01030-c7fc-447c-86ee-c1182beae638,image,smoke]              21.497
+tempest.api.volume.test_volumes_get.VolumesV2GetTest.test_volume_create_get_update_delete[id-27fb0e9f-fb64-41dd-8bdb-1ffa762f0d51,smoke]                               20.193
+tempest.scenario.test_server_basic_ops.TestServerBasicOps.test_server_basicops[compute,id-7fff3fb3-91d8-4fd0-bd7d-0204f1f180ba,network,smoke]                          14.608
+tempest.api.compute.servers.test_server_actions.ServerActionsTestJSON.test_reboot_server_hard[id-2cb1baf6-ac8d-4429-bf0d-ba8a0ba53e32,smoke]                            9.353
+tempest.api.orchestration.stacks.test_resource_types.ResourceTypesTest.test_resource_type_list[id-7123d082-3577-4a30-8f00-f805327c4ffd,smoke]                           7.953
+tempest.api.identity.admin.v3.test_groups.GroupsV3TestJSON.test_group_users_add_list_delete[id-1598521a-2f36-4606-8df9-30772bd51339,smoke]                              3.878
+tempest.api.orchestration.stacks.test_soft_conf.TestSoftwareConfig.test_software_deployment_update_no_metadata_change[id-2ac43ab3-34f2-415d-be2e-eabb4d14ee32,smoke]    2.258
+tempest.api.identity.admin.v2.test_services.ServicesTestJSON.test_list_services[id-34ea6489-012d-4a86-9038-1287cadd5eca,smoke]                                          1.878
+ERROR: InvocationError: '/bin/bash tools/pretty_tox.sh \\[.*\\bsmoke\\b.*\\] '
+__________________________________________________________________________________________________ summary __________________________________________________________________________________________________
+ERROR:   smoke: commands failed
