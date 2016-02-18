@@ -21,14 +21,7 @@ if [ ! -d "py27" ]; then
 	exit 1;
 fi
 
-if [ $3 = "--read-only" ]; then
-	echo "Cloning HTTPS"
-	git clone https://review.openstack.org/openstack/oslo.messaging
-else
-	echo "Cloning SSH"
-	git clone ssh://ozamiatin@review.openstack.org:29418/openstack/oslo.messaging
-fi
-
+git clone ssh://ozamiatin@review.openstack.org:29418/openstack/oslo.messaging
 cd ./oslo.messaging || exit 1
 git review -d $CHANGE_ID
 
