@@ -21,7 +21,7 @@ if [ ! -d "py27" ]; then
 	exit 1;
 fi
 
-if [ ! $READ_ONLY -eq 0 ] ; then
+if (( $READ_ONLY = 0 )) ; then
 	echo "Cloning HTTPS";
 	git clone https://review.openstack.org/openstack/oslo.messaging;
 else
