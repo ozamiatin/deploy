@@ -12,7 +12,7 @@ if [ ! -d "$WORK_DIRECTORY" ]; then
 fi
 
 cd "$WORK_DIRECTORY"
-virtualenv -p /usr/bin/python2.7 py27
+virtualenv -p /usr/bin/python py27
 
 if [ ! -d "py27" ]; then
 	echo "py27 env was not created!"
