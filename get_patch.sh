@@ -17,16 +17,16 @@ cd "$WORK_DIRECTORY"
 virtualenv -p /usr/bin/python py27
 
 if [ ! -d "py27" ]; then
-	echo "py27 env was not created!"
-	exit 1
+	echo "py27 env was not created!";
+	exit 1;
 fi
 
-if [[ $READ_ONLY -eq "--read-only" ]] ; then
-	echo "Cloning HTTPS"
-	git clone https://review.openstack.org/openstack/oslo.messaging
+if [ ! $READ_ONLY -eq 0 ] ; then
+	echo "Cloning HTTPS";
+	git clone https://review.openstack.org/openstack/oslo.messaging;
 else
-	echo "Cloning SSH"
-	git clone ssh://ozamiatin@review.openstack.org:29418/openstack/oslo.messaging
+	echo "Cloning SSH";
+	git clone ssh://ozamiatin@review.openstack.org:29418/openstack/oslo.messaging;
 fi
 
 cd ./oslo.messaging || exit 1
