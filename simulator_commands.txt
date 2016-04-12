@@ -1,0 +1,40 @@
+
+python simulator.py --debug True --url zmq:// -l 10 rpc-server
+python simulator.py --debug True --url zmq:// rpc-client --is-cast True -p 10 -m 1000
+
+
+python simulator.py --debug True --url zmq:// rpc-client --exit-wait 30 --is-cast True -p 10 -m 1000
+
+
+
+
+
+
+
+python simulator.py --config-file /tmp/zmq.conf --url zmq:// -tp becnhmark_topic_4 -s node-15 -l 10 rpc-server
+
+
+. ../../py27/bin/activate
+deactivate
+
+oslo-messaging-zmq-proxy
+oslo-messaging-zmq-proxy --type ROUTER
+
+
+find . -name "*.pyc" -delete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2016-04-07 07:06:51,949 INFO root server: duration: 13.02 count: 10000 (768.0 msg/sec) bytes: 32919470 (2528338 bps) latency: 0.040 min: 0.001 max: 0.107
+

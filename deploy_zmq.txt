@@ -1,5 +1,5 @@
 screen -d -R oza
-git clone https://github.com/ozamiatin/devstack.git
+git clone https://github.com/openstack-dev/devstack.git
 
 [[local|localrc]]
 DATABASE_PASSWORD=password
@@ -8,16 +8,27 @@ SERVICE_PASSWORD=password
 SERVICE_TOKEN=password
 RABBIT_PASSWORD=password
 
+enable_plugin zmq https://github.com/openstack/devstack-plugin-zmq.git
+
 ZEROMQ_MATCHMAKER=redis
 LIBS_FROM_GIT=oslo.messaging
 ENABLE_DEBUG_LOG_LEVEL=True
 
+OSLOMSG_REPO=https://review.openstack.org/openstack/oslo.messaging
+OSLOMSG_BRANCH=refs/changes/98/273498/4
+
+disable_service n-net
+disable_service rabbit
+# Enable Neutron
+
     # core compute (glance / keystone / nova (+ nova-network))
-ENABLED_SERVICES=g-api,g-reg,key,n-api,n-crt,n-obj,n-cpu,n-net,n-cond,n-sch,n-xvnc,n-cauth
+ENABLED_SERVICES=g-api,g-reg,key,n-api,n-crt,n-obj,n-cpu,n-cond,n-sch,n-xvnc,n-cauth
     # cinder
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron
 ENABLED_SERVICES+=,c-sch,c-api,c-vol
     # heat
 ENABLED_SERVICES+=,h-eng,h-api,h-api-cfn,h-api-cw
+ENABLED_SERVICES+=,q-svc,q-dhcp,q-meta,q-agt,q-l3
     # dashboard
 ENABLED_SERVICES+=,horizon
     # additional services
@@ -35,6 +46,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_different_exchanges
 
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout_with_concurrently_queues
  
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CastTestCase.test_fanout
@@ -42,9 +54,20 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.notify.test_logger:LoggingNotificationHandlerTestCase
 
 
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.zmq.test_startup:StartupOrderTestCase.test_call_server_before_client
+
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.notify.test_logger:LoggingNotificationHandlerTestCase.test_logging
+
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.zmq.test_heartbeats:HeartbeatsTestCase.test_call_redirected_server_shutdown
+
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.zmq.test_heartbeats:HeartbeatsTestCase.test_call_redirected_server_hang
+
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:NotifyTestCase.test_multiple_servers
+
 nosetests -sv  tempest.api.identity.admin.v2.test_users:UsersTestJSON
 
 nosetests -sv tempest.api.identity.admin.v3.test_domains:DomainsTestJSON
 nosetests -sv tempest.api.compute.servers.test_create_server:ServersTestManualDisk
 
 find . -name "*.pyc" -delete
+
