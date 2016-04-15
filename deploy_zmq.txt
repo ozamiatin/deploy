@@ -9,13 +9,14 @@ SERVICE_TOKEN=password
 RABBIT_PASSWORD=password
 
 enable_plugin zmq https://github.com/openstack/devstack-plugin-zmq.git
+enable_plugin ceilometer https://git.openstack.org/openstack/ceilometer.git
 
 ZEROMQ_MATCHMAKER=redis
 LIBS_FROM_GIT=oslo.messaging
 ENABLE_DEBUG_LOG_LEVEL=True
 
 OSLOMSG_REPO=https://review.openstack.org/openstack/oslo.messaging
-OSLOMSG_BRANCH=refs/changes/98/273498/4
+OSLOMSG_BRANCH=refs/changes/94/287094/5
 
 disable_service n-net
 disable_service rabbit
@@ -62,7 +63,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.zmq.test_heartbeats:HeartbeatsTestCase.test_call_redirected_server_hang
 
-./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:NotifyTestCase.test_multiple_servers
+./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:NotifyTestCase.test_independent_topics
 
 nosetests -sv  tempest.api.identity.admin.v2.test_users:UsersTestJSON
 
@@ -71,3 +72,5 @@ nosetests -sv tempest.api.compute.servers.test_create_server:ServersTestManualDi
 
 find . -name "*.pyc" -delete
 
+
+ss -pn | grep -P ":[2-6]\d{4}" | awk -F\" '{print $2}' | sort | uniq -c

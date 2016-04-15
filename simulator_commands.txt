@@ -9,6 +9,11 @@ python simulator.py --debug True --url zmq:// rpc-client --exit-wait 30 --is-cas
 
 
 
+python simulator.py --debug True --url zmq:// -l 10 rpc-server
+python simulator.py --debug True --url zmq:// rpc-client --timeout 10 -p 10 -m 1000
+
+
+
 
 
 python simulator.py --config-file /tmp/zmq.conf --url zmq:// -tp becnhmark_topic_4 -s node-15 -l 10 rpc-server
