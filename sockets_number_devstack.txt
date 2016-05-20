@@ -1,0 +1,16 @@
+Direct connections devstack:
+
+ozamiatin@ubuntu:~$ ss -pn | grep -P ":[2-6]\d{4}" | awk -F\" '{print $2}' | sort | uniq -c
+    131 
+     12 cinder-api
+      7 cinder-schedule
+      7 cinder-volume
+     21 glance-api
+      4 glance-registry
+     20 nova-api
+     23 nova-conductor
+      4 nova-consoleaut
+     12 nova-network
+      6 nova-scheduler
+     19 oslo-messaging-
+      1 redis-cli

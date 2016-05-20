@@ -6,8 +6,10 @@ SERVICE_TOKEN=password
 RABBIT_PASSWORD=password
 
 enable_plugin zmq https://github.com/ozamiatin/devstack-plugin-zmq.git
+#enable_plugin zmq https://github.com/openstack/devstack-plugin-zmq.git
 
-OSLOMSG_REPO=https://github.com/ozamiatin/oslo.messaging.git
+OSLOMSG_REPO=https://review.openstack.org/openstack/oslo.messaging
+OSLOMSG_BRANCH=refs/changes/52/304852/10
 
 ZEROMQ_MATCHMAKER=redis
 LIBS_FROM_GIT=oslo.messaging
