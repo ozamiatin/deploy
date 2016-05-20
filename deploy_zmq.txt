@@ -69,5 +69,54 @@ nosetests -sv  tempest.api.identity.admin.v2.test_users:UsersTestJSON
 nosetests -sv tempest.api.identity.admin.v3.test_domains:DomainsTestJSON
 nosetests -sv tempest.api.compute.servers.test_create_server:ServersTestManualDisk
 
+
+for pid in $(ps aux | grep prox[y] | awk '{print $2}'); do kill -9 $pid; done
+
+
+ss -pn | grep -P ":[2-6]\d{4}" | awk -F\" '{print $2}' | sort | uniq -c
+
 find . -name "*.pyc" -delete
+
+
+
+
+Sentinel deploy
+
+you have to use at least 3 nodes for redis.
+1. apt-get install redis-server python-redis
+2. edit /etc/redis/redis.conf
+master
+replace `bind 127.0.0.1` with `bind 127.0.0.1 your.ip.addr.ess`
+slave
+replace `bind 127.0.0.1` with `bind 127.0.0.1 your.ip.addr.ess`
+add `slaveof master.ip.addr.ess 6379`
+    restart Redis on each of 3 nodes. service redis-server restart
+
+    connect to a master node using
+        redis-cli -h master.ip.addr.ess info replication`
+       check if slave0 and slave1 are ok
+       the output should be smth like this
+        slave0:ip=192.168.0.6,port=6379,state=online,offset=58564721,lag=1
+        slave1:ip=192.168.0.7,port=6379,state=online,offset=58564876,lag=0
+
+run sentinel. This can be done in screens
+`mkdir sentinel`
+`cd $_; screen -S sentinel`
+
+Create sentinel config sentinel.conf
+port 26379
+sentinel monitor oslo-messaging-zeromq 192.168.0.3 6379 2
+sentinel down-after-milliseconds oslo-messaging-zeromq 2000
+sentinel failover-timeout oslo-messaging-zeromq 60000
+sentinel config-epoch oslo-messaging-zeromq 106
+
+run `redis-sentinel sentinel.conf` on each controller
+
+allow tcp traffics
+iptables -A INPUT -p tcp --match multiport --dports 6379,26379 -j ACCEPT
+Zmq config:
+[matchmaker_redis] 
+sentinel_hosts=host1:26379, host2:26379, host3:26379
+
+
 
