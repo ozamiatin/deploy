@@ -7,19 +7,30 @@ python simulator.py --debug True --url zmq:// rpc-client --exit-wait 30 --is-cas
 
 
 
-
-
-python simulator.py --debug True --url zmq:// -l 10 rpc-server
-python simulator.py --debug True --url zmq:// rpc-client --timeout 10 -p 10 -m 1000
-
+python simulator.py --url zmq:// --config-file ~/zmq.conf rpc-server
+python simulator.py --url zmq:// --config-file ~/zmq.conf rpc-client --is-cast True --is-fanout True -p 10 -m 1000
 
 
 
 
-python simulator.py --config-file /tmp/zmq.conf --url zmq:// -tp becnhmark_topic_4 -s node-15 -l 10 rpc-server
+python simulator.py --url zmq:// -l 20 rpc-server
+python simulator.py --url zmq:// rpc-client --timeout 10 -p 10 -m 10000
 
 
-. ../../py27/bin/activate
+python simulator.py --debug True --url zmq:// -l 20 rpc-server
+python simulator.py --debug True --url zmq:// rpc-client --timeout 10 -p 30 -m 1000
+
+
+cd tools
+
+. ../py27/bin/activate
+
+
+python simulator.py --config-file /tmp/zmq.conf --debug True --url zmq:// -l 20 rpc-server
+python simulator.py --config-file /tmp/zmq.conf --debug True --url zmq:// rpc-client --is-cast True --is-fanout True -p 10 -m 1000
+
+
+. ../../venv/bin/activate
 deactivate
 
 oslo-messaging-zmq-proxy
@@ -29,7 +40,7 @@ oslo-messaging-zmq-proxy --type ROUTER
 find . -name "*.pyc" -delete
 
 
-
+iptables -A INPUT -p tcp --match multiport --dports 1000:65535 -j ACCEPT
 
 
 
