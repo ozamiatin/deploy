@@ -112,8 +112,9 @@ sentinel config-epoch oslo-messaging-zeromq 106
 run `redis-sentinel sentinel.conf &` on each controller
 
 allow tcp traffics
-iptables -A INPUT -p tcp --match multiport --dports 6379,16379,26379 -j ACCEPT
+iptables -A INPUT -p tcp --match multiport --dports 6379,16379,26379,50001,50002,50003 -j ACCEPT
 iptables -A INPUT -p tcp --match multiport --dports 49152:65535 -j ACCEPT
+
 
 Zmq config:
 [matchmaker_redis] 

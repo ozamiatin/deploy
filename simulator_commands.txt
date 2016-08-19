@@ -7,12 +7,15 @@ python simulator.py --debug True --url zmq:// rpc-client --exit-wait 30 --is-cas
 
 
 
-python simulator.py --url zmq:// --config-file ~/zmq.conf rpc-server
-python simulator.py --url zmq:// --config-file ~/zmq.conf rpc-client --is-cast True --is-fanout True -p 10 -m 1000
+python simulator.py --url zmq:// rpc-server
+python simulator.py --url zmq:// rpc-client --is-cast True --is-fanout True -p 10 -m 1000
 
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-server
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-client --is-cast True -p 10 -m 100
 
+
+
+oslo-messaging-zmq-proxy --frontend-port 50001 --backend-port 50002 --publisher-port 50003
 
 
 python simulator.py --debug True --url zmq:// -l 10 rpc-server --topic aaa
