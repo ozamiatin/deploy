@@ -6,10 +6,17 @@ python simulator.py --debug True --url zmq:// rpc-client --is-cast True -p 10 -m
 python simulator.py --debug True --url zmq:// rpc-client --exit-wait 30 --is-cast True -p 10 -m 1000
 
 
+python simulator.py --debug True --url zmq:// rpc-server
+python simulator.py --debug True --url zmq:// rpc-client -p 10 -m 1000
+
+keys * - all keys
+sadd - add member to set
+smebers - watch memebers of set
+
 
 
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-server
-python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-client --is-cast True -p 10 -m 100
+python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-client --is-cast True -p 10 -m 1000
 
 
 
@@ -34,7 +41,6 @@ python simulator.py --config-file /tmp/zmq.conf --url zmq:// -tp becnhmark_topic
 deactivate
 
 oslo-messaging-zmq-proxy
-oslo-messaging-zmq-proxy --type ROUTER
 
 
 find . -name "*.pyc" -delete

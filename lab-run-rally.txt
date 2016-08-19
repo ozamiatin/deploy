@@ -1,0 +1,69 @@
+ssh node-4
+scp node-4://root/openrc .
+mv openrc /var/lib/rally_container/
+chmod 777 /var/lib/rally_container/openrc
+
+
+
+wget https://raw.githubusercontent.com/jumpojoy/scale-scripts/master/scripts/rally.sh
+. openrc 
+   10  rally
+   11  rally deployment list
+   12  rally deployment create --fromenv --name=test
+   13  rally --help
+   14  rally deployment
+   15  rally-manage db
+   16  rally-manage db create
+   17  rally deployment list
+   18  rally deployment create --fromenv --name=test
+   19  rally deployment check test
+   20  rally
+   21  rally deployment
+   22  glance image-list
+   23  ls
+   24  find /usr/lib/ |grep rally
+   25  find /lib |grep rally
+   26  find / |grep rally
+   27  cd /usr/share/rally/
+   28  ls
+   29  cd samples/
+   30  ls
+   31  cd tasks/
+   32  ls
+   33  cd scenarios/
+   34  ls
+   35  ls
+   36  cd nova/
+   37  ls
+   38  cp boot-and-delete.yaml ~/
+   39  cd ~
+   40  ls
+   41  vim boot-and-delete.yaml 
+   42  vim boot-and-delete.yaml 
+   43  glance image-list
+   44  vim boot-and-delete.yaml 
+   45  rally task start
+   46  ls
+   47  rally task start boot-and-delete.yaml
+   48  vim boot-and-delete.yaml 
+   49  vim boot-and-delete.yaml 
+   50  rally task start boot-and-delete.yaml
+   51  rally task list
+   52  rally task delete 2848dd38-8265-4b77-b339-a2451a835349
+   53  rally task delete 2848dd38-8265-4b77-b339-a2451a835349 --force
+   54  rally task start 
+   55  rally help task start
+   56  rally task show  41868039-e0b5-4706-a27e-dc575c92cfab
+   57  rally task status  41868039-e0b5-4706-a27e-dc575c92cfab
+   58  rally task report  41868039-e0b5-4706-a27e-dc575c92cfab
+   59  rally task report  41868039-e0b5-4706-a27e-dc575c92cfab --out html
+   60  ls
+   61  vim html 
+   62  ls
+   63  rm -rf html 
+   64  rally task   41868039-e0b5-4706-a27e-dc575c92cfab
+   65  rally task   41868039-e0b5-4706-a27e-dc575c92cfab dtailed
+   66  rally task   41868039-e0b5-4706-a27e-dc575c92cfab detailed
+   67  rally task   detailed 41868039-e0b5-4706-a27e-dc575c92cfab 
+   68  rally task   41868039-e0b5-4706-a27e-dc575c92cfab
+   69  rally task report  41868039-e0b5-4706-a27e-dc575c92cfab --out test.html

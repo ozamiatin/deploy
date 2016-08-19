@@ -1,0 +1,88 @@
+ssh root@172.16.44.13
+
+
+ssh root@172.16.174.139
+
+
+ssh admin@172.18.204.39
+
+VB: 172.18.204.84
+
+python -m wally test test configs-examples/omg_zmq.yaml
+
+
+
+
+python -m wally test test configs-examples/omg.yaml
+
+
+
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep simu[l] |grep -v grep|cut -c6-15`; do echo $p; done'; done
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep simu[l] |grep -v grep|cut -c6-15`; do kill -2 $p; done'; done
+
+for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep zm[q] |grep -v grep|cut -c6-15`; do echo $p; done'; done
+for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep zm[q] |grep -v grep|cut -c6-15`; do kill -9 $p; done'; done
+
+for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i '". /root/oslo.messaging/venv/bin/activate" && "oslo-messaging-zmq-proxy --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &"'; done
+
+
+
+python simulator.py --url zmq:// rpc-server 
+python simulator.py --url zmq:// rpc-client -p 10 -m 1000
+
+
+
+. /root/oslo.messaging/venv/bin/activate
+oslo-messaging-zmq-proxy --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
+
+
+
+oslo-messaging-zmq-proxy --config-file=/tmp/zmq.conf
+
+oslo-messaging-zmq-proxy --config-file ~/oslo.messaging/zmq.conf
+oslo-messaging-zmq-proxy --type ROUTER --config-file ~/oslo.messaging/zmq.conf
+
+python simulator.py --config-file /tmp/zmq.conf --url zmq:// rpc-server
+python simulator.py --config-file /tmp/zmq.conf --url zmq:// rpc-client --is-cast True --is-fanout True -p 10 -m 100
+
+
+python simulator.py --debug True --url zmq:// --config-file /tmp/zmq.conf rpc-server 
+python simulator.py --debug True --url "zmq+redis://node-16:6379" rpc-client --is-cast True
+
+ss -pn | grep -P ":[2-6]\d{4}" | awk -F\" '{print $2}' | sort | uniq -c
+
+[root@fuel ~]# fuel node
+id | status | name         | cluster | ip         | mac               | roles      | pending_roles | online | group_id
+---+--------+--------------+---------+------------+-------------------+------------+---------------+--------+---------
+16 | ready  | compute_6    |       1 | 10.20.0.17 | 52:54:00:12:ec:4c | compute    |               |      1 |        1
+10 | ready  | compute_1    |       1 | 10.20.0.13 | 52:54:00:a2:43:03 | compute    |               |      1 |        1
+17 | ready  | compute_4    |       1 | 10.20.0.20 | 52:54:00:0f:1c:e3 | compute    |               |      1 |        1
+11 | ready  | compute_15   |       1 | 10.20.0.8  | 52:54:00:fe:f9:89 | compute    |               |      1 |        1
+12 | ready  | compute_0    |       1 | 10.20.0.14 | 52:54:00:41:6f:e6 | compute    |               |      1 |        1
+ 8 | ready  | controller_0 |       1 | 10.20.0.7  | 52:54:00:2f:46:d9 | controller |               |      1 |        1
+ 4 | ready  | compute_7    |       1 | 10.20.0.15 | 52:54:00:95:78:6e | compute    |               |      1 |        1
+ 7 | ready  | compute_8    |       1 | 10.20.0.12 | 52:54:00:29:76:97 | compute    |               |      1 |        1
+ 2 | ready  | compute_2    |       1 | 10.20.0.6  | 52:54:00:06:f5:c1 | compute    |               |      1 |        1
+ 3 | ready  | compute_12   |       1 | 10.20.0.11 | 52:54:00:bc:9d:f5 | compute    |               |      1 |        1
+20 | ready  | compute_13   |       1 | 10.20.0.22 | 52:54:00:d4:cc:9c | compute    |               |      1 |        1
+13 | ready  | compute_11   |       1 | 10.20.0.16 | 52:54:00:5c:0e:94 | compute    |               |      1 |        1
+ 6 | ready  | compute_5    |       1 | 10.20.0.3  | 52:54:00:0a:95:08 | compute    |               |      1 |        1
+ 1 | ready  | compute_10   |       1 | 10.20.0.5  | 52:54:00:46:06:0b | compute    |               |      1 |        1
+ 9 | ready  | compute_9    |       1 | 10.20.0.10 | 52:54:00:fc:d3:53 | compute    |               |      1 |        1
+15 | ready  | compute_3    |       1 | 10.20.0.9  | 52:54:00:dc:fc:b5 | compute    |               |      1 |        1
+18 | ready  | controller_2 |       1 | 10.20.0.19 | 52:54:00:fc:35:bd | controller |               |      1 |        1
+ 5 | ready  | compute_16   |       1 | 10.20.0.4  | 52:54:00:10:e6:52 | compute    |               |      1 |        1
+14 | ready  | controller_1 |       1 | 10.20.0.21 | 52:54:00:12:19:f7 | controller |               |      1 |        1
+19 | ready  | compute_14   |       1 | 10.20.0.18 | 52:54:00:99:42:50 | compute    |               |      1 |        1
+
+
+redis-cli -h 192.168.0.16
+
+oslo-messaging-zmq-proxy --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
+
+oslo-messaging-zmq-proxy --debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003 --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
+
+--debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003
+
+redis-server /etc/redis/redis.conf &
+redis-sentinel sentinel.conf &

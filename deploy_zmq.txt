@@ -1,4 +1,29 @@
-screen -d -R oza
+ssh admin@172.18.204.39
+
+
+. ../../py27/bin/activate
+
+python -m wally test test configs-examples/omg.yaml
+
+dpkg -l | grep messaging
+
+http://perestroika-repo-tst.infra.mirantis.net/review/CR-16347/mos-repos/ubuntu/8.0/pool/main/p/python-oslo.messaging/
+
+
+http://172.18.162.63/review/CR-19937/mos-repos/ubuntu/9.0/pool/main/p/python-oslo.messaging/
+
+
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep simul`; do kill $p; done'; done
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep simul |grep -v grep|cut -c6-15`; do echo $p; done'; done
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep simul |grep -v grep|cut -c6-15`; do kill -9 $p; done'; done
+
+
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i `ps aux | grep simul | grep awk '{print $2}'`; done
+
+
+wget http://172.18.162.63/review/CR-19937/mos-repos/ubuntu/9.0/pool/main/p/python-oslo.messaging/python-oslo.messaging_4.6.1-3~u14.04%2bmos7_all.deb
+
+screen -d -R omgbench
 git clone https://github.com/openstack-dev/devstack.git
 
 [[local|localrc]]
@@ -16,7 +41,7 @@ LIBS_FROM_GIT=oslo.messaging
 ENABLE_DEBUG_LOG_LEVEL=True
 
 OSLOMSG_REPO=https://review.openstack.org/openstack/oslo.messaging
-OSLOMSG_BRANCH=refs/changes/94/287094/5
+OSLOMSG_BRANCH=refs/changes/26/347226/2
 
 disable_service n-net
 disable_service rabbit
@@ -45,7 +70,7 @@ git clone https://github.com/openstack-dev/devstack.git
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 
-./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_different_exchanges
+./setup-test-env-zmq-proxy.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_different_exchanges
 
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout_with_concurrently_queues
@@ -78,7 +103,9 @@ ss -pn | grep -P ":[2-6]\d{4}" | awk -F\" '{print $2}' | sort | uniq -c
 
 find . -name "*.pyc" -delete
 
+iptables -A INPUT -p tcp --match multiport --dports 49152:65535 -j ACCEPT
 
+iptables -A INPUT -p tcp --match multiport --dport 6379 -j ACCEPT
 
 Sentinel deploy
 
@@ -114,7 +141,16 @@ run `redis-sentinel sentinel.conf` on each controller
 
 allow tcp traffics
 iptables -A INPUT -p tcp --match multiport --dports 6379,26379 -j ACCEPT
+iptables -A OUTPUT -p tcp --match multiport --dports 6379,26379 -j ACCEPT
+iptables -A FORWARD -p tcp --match multiport --dports 6379,26379 -j ACCEPT
 Zmq config:
 [matchmaker_redis] 
 sentinel_hosts=host1:26379, host2:26379, host3:26379
 
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LDFLAGS="-L$(brew --prefix openssl)/lib"
+export CFLAGS="-I$(brew --prefix openssl)/include"
+
+env LDFLAGS="-L$(brew --prefix openssl)/lib" CFLAGS="-I$(brew --prefix openssl)/include" pip install -r test-requirements.txt
