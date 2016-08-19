@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ssh admin@172.18.204.39
 
 
@@ -24,6 +25,8 @@ for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i `ps aux | grep s
 wget http://172.18.162.63/review/CR-19937/mos-repos/ubuntu/9.0/pool/main/p/python-oslo.messaging/python-oslo.messaging_4.6.1-3~u14.04%2bmos7_all.deb
 
 screen -d -R omgbench
+screen -d -R devstack
+
 git clone https://github.com/openstack-dev/devstack.git
 
 [[local|localrc]]
@@ -34,7 +37,6 @@ SERVICE_TOKEN=password
 RABBIT_PASSWORD=password
 
 enable_plugin zmq https://github.com/openstack/devstack-plugin-zmq.git
-enable_plugin ceilometer https://git.openstack.org/openstack/ceilometer.git
 
 ZEROMQ_MATCHMAKER=redis
 LIBS_FROM_GIT=oslo.messaging
@@ -42,6 +44,7 @@ ENABLE_DEBUG_LOG_LEVEL=True
 
 OSLOMSG_REPO=https://review.openstack.org/openstack/oslo.messaging
 OSLOMSG_BRANCH=refs/changes/26/347226/2
+OSLOMSG_BRANCH=refs/changes/04/342904/6
 
 disable_service n-net
 disable_service rabbit
@@ -72,7 +75,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 ./setup-test-env-zmq-proxy.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_different_exchanges
 
-./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout
+./setup-test-env-zmq-proxy.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CallTestCase.test_timeout_with_concurrently_queues
  
 ./setup-test-env-zmq.sh nosetests -sv oslo_messaging.tests.functional.test_functional:CastTestCase.test_fanout
@@ -137,12 +140,17 @@ sentinel down-after-milliseconds oslo-messaging-zeromq 2000
 sentinel failover-timeout oslo-messaging-zeromq 60000
 sentinel config-epoch oslo-messaging-zeromq 106
 
-run `redis-sentinel sentinel.conf` on each controller
+run `redis-sentinel sentinel.conf &` on each controller
 
 allow tcp traffics
 iptables -A INPUT -p tcp --match multiport --dports 6379,26379 -j ACCEPT
 iptables -A OUTPUT -p tcp --match multiport --dports 6379,26379 -j ACCEPT
 iptables -A FORWARD -p tcp --match multiport --dports 6379,26379 -j ACCEPT
+
+iptables -A INPUT -p tcp --match multiport --dports 6379,16379,26379,50001,50002,50003 -j ACCEPT
+iptables -A INPUT -p tcp --match multiport --dports 49152:65535 -j ACCEPT
+
+
 Zmq config:
 [matchmaker_redis] 
 sentinel_hosts=host1:26379, host2:26379, host3:26379

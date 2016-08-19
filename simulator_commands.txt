@@ -14,10 +14,15 @@ sadd - add member to set
 smebers - watch memebers of set
 
 
+python simulator.py --url zmq:// rpc-server
+python simulator.py --url zmq:// rpc-client --is-cast True --is-fanout True -p 10 -m 1000
 
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-server
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-client --is-cast True -p 10 -m 1000
 
+
+
+oslo-messaging-zmq-proxy --frontend-port 50001 --backend-port 50002 --publisher-port 50003
 
 
 python simulator.py --debug True --url zmq:// -l 10 rpc-server --topic aaa
@@ -27,17 +32,26 @@ python simulator.py --debug True --url zmq:// rpc-client -p 10 -m 1000
 python simulator.py --config-file /tmp/zmq.conf --url zmq:// -l 10 rpc-server
 python simulator.py --config-file /tmp/zmq.conf --url zmq:// rpc-client -p 10 -m 100
 
-python simulator.py --debug True --url zmq:// -l 10 rpc-server
-python simulator.py --debug True --url zmq:// rpc-client --timeout 10 -p 10 -m 1000
 
 
+python simulator.py --url zmq:// -l 20 rpc-server
+python simulator.py --url zmq:// rpc-client --timeout 10 -p 10 -m 10000
 
 
+python simulator.py --debug True --url zmq:// -l 20 rpc-server
+python simulator.py --debug True --url zmq:// rpc-client --timeout 10 -p 30 -m 1000
 
-python simulator.py --config-file /tmp/zmq.conf --url zmq:// -tp becnhmark_topic_4 -s node-15 -l 10 rpc-server
+
+cd tools
+
+. ../py27/bin/activate
 
 
-. ../../py27/bin/activate
+python simulator.py --config-file /tmp/zmq.conf --debug True --url zmq:// -l 20 rpc-server
+python simulator.py --config-file /tmp/zmq.conf --debug True --url zmq:// rpc-client --is-cast True --is-fanout True -p 10 -m 1000
+
+
+. ../../venv/bin/activate
 deactivate
 
 oslo-messaging-zmq-proxy
@@ -46,7 +60,7 @@ oslo-messaging-zmq-proxy
 find . -name "*.pyc" -delete
 
 
-
+iptables -A INPUT -p tcp --match multiport --dports 1000:65535 -j ACCEPT
 
 
 python simulator.py --url zmq:// -tp aaa -s node-95 rpc-server
