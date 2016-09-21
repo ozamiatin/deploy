@@ -1,17 +1,35 @@
-ssh root@172.16.44.13
+ssh root@172.16.44.11
 
-
-ssh root@172.16.174.139
+ssh root@172.16.174.152
 
 
 ssh admin@172.18.204.39
 
 VB: 172.18.204.84
 
-python -m wally test test configs-examples/omg_zmq.yaml
+
+
+for i in `virsh list | grep fuel-slave-ozamiatin-zmq | awk '{print $2}'`; do virsh reboot $i; done
+
+
+fuel node|grep compute | awk '{print $11}'
+
+      <mac address='52:54:00:0a:95:08'/>
+      <mac address='52:54:00:3e:8b:34'/>
+      <mac address='52:54:00:83:9a:db'/>
+      <mac address='52:54:00:e0:d4:76'/>
+      <mac address='52:54:00:09:27:46'/>
+      <mac address='52:54:00:13:41:ab'/>
+
+
+["52:54:00:29:76:97", "52:54:00:fc:d3:53", "52:54:00:46:06:0b", "52:54:00:41:6f:e6", "52:54:00:0a:95:08", "52:54:00:06:f5:c1", "52:54:00:fe:f9:89", "52:54:00:95:78:6e", "52:54:00:0f:1c:e3"]
 
 
 
+python configure_zmq.py --redis-host node-8 --deploy-redis
+python configure_zmq.py --redis-host node-8 --git-repo https://github.com/ozamiatin/oslo.messaging.git --git-branch gateway --start-proxies-venv
+
+python configure_zmq.py --redis-host node-8 --git-repo https://github.com/ozamiatin/oslo.messaging.git --git-branch gateway --start-proxies-venv --debug
 
 python -m wally test test configs-examples/omg.yaml
 
@@ -22,6 +40,21 @@ for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps au
 
 for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep zm[q] |grep -v grep|cut -c6-15`; do echo $p; done'; done
 for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep zm[q] |grep -v grep|cut -c6-15`; do kill -9 $p; done'; done
+
+
+. /tmp/venv/bin/activate && oslo-messaging-zmq-proxy --debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003 --config-file=/etc/zmq-proxy/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
+
+
+for i in `fuel node|grep compute | awk '{print $9}'`; do ssh $i 'for p in `ps aux | grep cinder-volum[e] |grep -v grep|cut -c6-15`; do echo $p; done'; done
+
+
+scp -r root@172.16.44.11:/var/log/job-reports/rally_report.html /Users/ozamiatin/Downloads/rally_report_zmq_1309.html
+
+
+for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i 'rm -rf /root/zmq.conf'; done
+
+for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i 'dpkg '; done
+
 
 for i in `fuel node|grep controller | awk '{print $9}'`; do ssh $i '". /root/oslo.messaging/venv/bin/activate" && "oslo-messaging-zmq-proxy --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &"'; done
 
@@ -82,7 +115,25 @@ oslo-messaging-zmq-proxy --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>
 
 oslo-messaging-zmq-proxy --debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003 --config-file=/tmp/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
 
---debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003
+
+
+source /tmp/venv/bin/activate && oslo-messaging-zmq-proxy --frontend-port 50001 --backend-port 50002 --publisher-port 50003 --config-file=/etc/zmq-proxy/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
+
+source /tmp/venv/bin/activate && oslo-messaging-zmq-proxy --debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003 --config-file=/etc/zmq-proxy/zmq.conf > /var/log/zmq-proxy.log 2>&1 < /var/log/zmq-proxy.log &
+
+
+./zmq-proxy --frontend-port 50001 --backend-port 50002 --publisher-port 50003 --config-file=/tmp/zmq.conf > /var/log/zmq-proxy-cpp.log 2>&1 < /var/log/zmq-proxy-cpp.log &
+
+192.168.0.4
+
+oslo-messaging-zmq-proxy --debug True --frontend-port 50001 --backend-port 50002 --publisher-port 50003
 
 redis-server /etc/redis/redis.conf &
 redis-sentinel sentinel.conf &
+
+
+cd /opt/stack~
+~. .vevn/bin/activate~
+~rally task list - список выполненных тасок
+/opt/stack/rally-scenarios/ - все таски
+~/var/log/job-reports - логи тасок

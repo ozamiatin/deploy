@@ -15,9 +15,13 @@ smebers - watch memebers of set
 
 
 python simulator.py --url zmq:// rpc-server
+
+python simulator.py --url zmq:// rpc-client -p 10 -m 1000
+
 python simulator.py --url zmq:// rpc-client --is-cast True --is-fanout True -p 10 -m 1000
 
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-server
+python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-client -p 10 -m 1000
 python simulator.py --config-file ~/zmq.conf --url zmq:// rpc-client --is-cast True -p 10 -m 1000
 
 
@@ -26,7 +30,7 @@ oslo-messaging-zmq-proxy --frontend-port 50001 --backend-port 50002 --publisher-
 
 
 python simulator.py --debug True --url zmq:// -l 10 rpc-server --topic aaa
-python simulator.py --debug True --url zmq:// -l 10 rpc-server
+python simulator.py --debug True --url zmq:// rpc-server
 python simulator.py --debug True --url zmq:// rpc-client -p 10 -m 1000
 
 python simulator.py --config-file /tmp/zmq.conf --url zmq:// -l 10 rpc-server

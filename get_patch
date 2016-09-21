@@ -1,0 +1,26 @@
+#!/bin/bash
+
+PATCH_DIRECTORY=$1
+REF_ID=$2
+
+
+echo "Directory: $PATCH_DIRECTORY"
+echo "Patch: $REF_ID"
+
+mkdir $PATCH_DIRECTORY
+cd $PATCH_DIRECTORY
+
+if [ -z "$3" ];
+	then
+		echo "Repository unset - cloning oslo.messaging by default"
+		git clone ssh://ozamiatin@review.openstack.org:29418/openstack/oslo.messaging;
+	else
+		echo "Repository set to $3"
+		git clone $3;
+fi
+
+cd oslo.messaging && git review -d $REF_ID
+
+cd ..
+
+virtualenv py27 && source py27/bin/activate && pip install ./oslo.messaging && pip install -r ./oslo.messaging/test-requirements.txt && deactivate

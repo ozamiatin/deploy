@@ -3,6 +3,14 @@ scp node-4://root/openrc .
 mv openrc /var/lib/rally_container/
 chmod 777 /var/lib/rally_container/openrc
 
+    2  docker ps
+    3  dockerctl shell 485bc305a2ef
+    4  dockerctl --help
+    5  dockerctl 
+    6  docker
+    7  docker attach 485bc305a2ef
+    8  screen  -S vsaienko
+    9  history
 
 
 wget https://raw.githubusercontent.com/jumpojoy/scale-scripts/master/scripts/rally.sh
